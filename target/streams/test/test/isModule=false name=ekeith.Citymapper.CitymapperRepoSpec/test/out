@@ -1,0 +1,7 @@
+[0m[[0m[0minfo[0m] [0m[0m[32mCitymapperRepoSpec:[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mCitymapper.checkCoverage(covReq)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should capture Some[_] request[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should capture Some[Vector[_]] of requests[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should capture a Vector of length 1 for a single request[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32mCitymapper.checkCoverage(covReq).checkCoverage(covReq2)[0m[0m
+[0m[[0m[0minfo[0m] [0m[0m[32m- should capture a Vector of length 2[0m[0m
