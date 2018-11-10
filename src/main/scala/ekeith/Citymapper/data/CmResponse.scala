@@ -8,14 +8,6 @@ package ekeith.Citymapper.data
 sealed trait CmResponse
 
 /**
-  * Representation of a WGS84 position coordinate.
-  *
-  * @param latitude The WGS84 latitude of the point.
-  * @param longitude The WGS84 longitude of the point.
-  */
-final case class Wgs84Coordinate(latitude: Double, longitude: Double)
-
-/**
   * A single point's CityMapper coverage response.
   *
   * @param covered True if Citymapper covers this location, else False.
@@ -32,6 +24,6 @@ final case class CoverageResponse(points: Vector[PointCoverage]) extends CmRespo
 
 /**
   * The response from Citymapper to a travel time request.
-  * @param minutes The estimated travel time reported in minutes.
+  * @param travel_time_minutes The estimated travel time reported in minutes.
   */
-final case class TravelTime(minutes: Int) extends CmResponse
+final case class TravelTimeResponse(travel_time_minutes: Int) extends CmResponse

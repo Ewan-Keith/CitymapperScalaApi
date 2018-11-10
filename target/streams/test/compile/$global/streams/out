@@ -1,4 +1,0 @@
-[0m[[0m[33mwarn[0m] [0m[0m/home/ewan/Documents/CitymapperScalaApi/src/test/scala/ekeith/Citymapper/CitymapperRepoSpec.scala:13:47: Type parameter should not be specified because it will be erased at runtime, please use _ instead.  Note that in future version of ScalaTest this will give a compiler error.[0m
-[0m[[0m[33mwarn[0m] [0m[0m    reqTest.coverageRequests shouldBe a [Some[Vector[_]]][0m
-[0m[[0m[33mwarn[0m] [0m[0m                                              ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
