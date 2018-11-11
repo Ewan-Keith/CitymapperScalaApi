@@ -1,4 +1,4 @@
-package ekeith.Citymapper.data
+package ekeith.CitymapperApi.data
 
 /**
   * The type of time provided in a travel time request.

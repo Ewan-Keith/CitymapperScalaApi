@@ -1,4 +1,4 @@
-package ekeith.Citymapper.data
+package ekeith.CitymapperApi.data
 
 import com.github.nscala_time.time.Imports._
 
@@ -21,14 +21,18 @@ final case class CoverageRequest(coord: Wgs84Coordinate, id: Option[String] = No
 /**
   * Represents a single travel time request to be sent to the Citymapper API.
   *
-  * @param start The starting location from which request travel time.
+  * @param start The starting location from which to request travel time.
   * @param end The end location for which to request travel time.
-  * @param time A date & time in ISO-8601 format. If omitted, travel time is
-  *             computed for travel at the time of the request.
-  * @param timeType If 'time' is provided, a 'time_type' must be provided as well.
-  *                 At the moment, the only defined 'time_type' value is 'arrival()'
+  * @param timeInfo An optional TimeRequestInfo object giving an arrival time to use for the request. If left
+  *                 as `None` then the current time will be used.
   */
 final case class TravelTimeRequest(start: Wgs84Coordinate, end: Wgs84Coordinate,
                                    timeInfo: Option[TimeRequestInfo] = None) extends CmRequest
 
+/**
+  *
+  * @param time A date & time in ISO-8601 format.
+  * @param timeType If 'time' is provided, a 'time_type' must be provided as well.
+  *                   At the moment, the only defined 'time_type' value is 'arrival()'
+  */
 final case class TimeRequestInfo(time: DateTime, timeType: TimeType = arrival())

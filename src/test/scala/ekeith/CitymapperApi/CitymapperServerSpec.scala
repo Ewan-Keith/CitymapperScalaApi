@@ -1,8 +1,8 @@
-package ekeith.Citymapper
+package ekeith.CitymapperApi
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
-import ekeith.Citymapper.data._
+import ekeith.CitymapperApi.data._
 import org.scalatest.{AsyncFlatSpec, Matchers}
 import com.github.nscala_time.time.Imports._
 
@@ -36,12 +36,12 @@ class CitymapperServerSpec extends AsyncFlatSpec with Matchers {
   }
 
   "CitymapperOnlineServer.travelTimeBoundsGenerator()" should "return the correct time bounds URI" in {
-    CitymapperOnlineServer.travelTimeBoundsGenerator(Some(testingTimeInfo))("abc/") shouldEqual
+    CitymapperOnlineServer.travelTimeInfoGenerator(Some(testingTimeInfo))("abc/") shouldEqual
       "abc/&time=2004-12-14T05:39:45.618Z&time_type=arrival"
   }
 
   "CitymapperOnlineServer.travelTimeBoundsGenerator()" should "return the base string if no time info provided" in {
-    CitymapperOnlineServer.travelTimeBoundsGenerator(None)("abc/") shouldEqual
+    CitymapperOnlineServer.travelTimeInfoGenerator(None)("abc/") shouldEqual
       "abc/"
   }
 

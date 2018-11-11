@@ -11,6 +11,11 @@ libraryDependencies ++= Seq("org.scalactic" %% "scalactic" % "3.0.5",
   "com.typesafe.akka" %% "akka-stream" % "2.5.12",
   "de.heikoseeberger" %% "akka-http-circe" % "1.22.0",
   "io.circe" %% "circe-core" % "0.10.0",
-  "io.circe" %% "circe-generic" % "0.10.0",
+  "io.circe" %% "circe-generic-extras" % "0.10.0",
   "io.circe" %% "circe-parser" % "0.10.0"
+)
+
+// provides Json snake to camel case conversions for decoding/encoding
+addCompilerPlugin(
+  "org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full
 )

@@ -1,4 +1,8 @@
-package ekeith.Citymapper.data
+package ekeith.CitymapperApi.data
+
+// provides snake to camelcase json encoding
+import ekeith.CitymapperApi.CitymapperOnlineServer.config
+import io.circe.generic.extras._
 
 /**
   * Abstract Response from the Citymapper API
@@ -24,6 +28,6 @@ final case class CoverageResponse(points: Vector[PointCoverage]) extends CmRespo
 
 /**
   * The response from Citymapper to a travel time request.
-  * @param travel_time_minutes The estimated travel time reported in minutes.
+  * @param travelTimeMinutes The estimated travel time reported in minutes.
   */
-final case class TravelTimeResponse(travel_time_minutes: Int) extends CmResponse
+@ConfiguredJsonCodec final case class TravelTimeResponse(travelTimeMinutes: Int) extends CmResponse

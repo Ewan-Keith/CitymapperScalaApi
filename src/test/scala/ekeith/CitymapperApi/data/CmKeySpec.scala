@@ -1,4 +1,4 @@
-package ekeith.Citymapper.data
+package ekeith.CitymapperApi.data
 
 import org.scalatest.{AsyncFlatSpec, Matchers}
 

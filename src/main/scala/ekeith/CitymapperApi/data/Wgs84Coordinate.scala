@@ -1,4 +1,4 @@
-package ekeith.Citymapper.data
+package ekeith.CitymapperApi.data
 
 /**
   * Representation of a WGS84 position coordinate.
