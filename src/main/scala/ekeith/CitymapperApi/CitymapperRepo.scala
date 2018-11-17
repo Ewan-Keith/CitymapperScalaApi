@@ -70,7 +70,7 @@ case class CitymapperRepo(coverageRequests: Vector[CoverageRequest],
   def run()(implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer, key: CmKey): Vector[Future[CmResponse]] =
     requests.map({
         case TravelTimeRequest(start, end, time) => server.travelTimeRequest(start, end, time, key)
-        case CoverageRequest(coord, id) => server.coverageRequest(coord, id)
+        case CoverageRequest(coord, id) => server.coverageRequest(coord, key)
       })
 }
 

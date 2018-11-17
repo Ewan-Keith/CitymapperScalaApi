@@ -2,7 +2,9 @@ package ekeith.CitymapperApi.data
 
 // provides snake to camelcase json encoding
 import ekeith.CitymapperApi.CitymapperOnlineServer.config
+import io.circe.{ Decoder, Encoder, HCursor, Json }
 import io.circe.generic.extras._
+import cats.syntax.either._
 
 /**
   * Abstract Response from the Citymapper API
@@ -20,11 +22,28 @@ sealed trait CmResponse
   */
 final case class PointCoverage(covered: Boolean, coord: Wgs84Coordinate, id: Option[String] = None)
 
+object PointCoverage {
+
+  implicit val decodeFoo: Decoder[PointCoverage] = new Decoder[PointCoverage] {
+    final def apply(c: HCursor): Decoder.Result[PointCoverage] =
+      for {
+        covered <- c.downField("covered").as[Boolean]
+        coord <- c.downField("coord").as[List[Double]]
+      } yield {
+        PointCoverage(covered, Wgs84Coordinate(coord.head, coord.tail.head), None)
+      }
+  }
+
+}
+
+
+
 /**
   * The response from Citymapper to a coverage request
   * @param points A vector of coverage results for requested points.
   */
 final case class CoverageResponse(points: Vector[PointCoverage]) extends CmResponse
+
 
 /**
   * The response from Citymapper to a travel time request.
