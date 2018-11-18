@@ -31,13 +31,20 @@ trait CitymapperServer extends UriConstructors {
     * @param end The end location for which to request travel time.
     * @param timeInfo An optional TimeRequestInfo object giving an arrival time to use for the request. If left
     *                 as `None` then the current time will be used.
+    * @param key The Citymapper API key to use for the request.
     * @return Future[TravelTimeResponse]
     */
   def travelTimeRequest(start: Wgs84Coordinate, end: Wgs84Coordinate,
                         timeInfo: Option[TimeRequestInfo] = None, key: CmKey)
                        (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[TravelTimeResponse]
 
-// to be documented once implemented
+  /**
+    * Makes a coverage request against the appropriate Citymapper server backend.
+    *
+    * @param coord  The location for which to request a coverage status.
+    * @param key The Citymapper API key to use for the request.
+    * @return Future[PointCoverage]
+    */
   def coverageRequest(coord: Wgs84Coordinate, key: CmKey)
                      (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[PointCoverage]
 
@@ -68,6 +75,7 @@ object CitymapperOnlineServer extends CitymapperServer with FailFastCirceSupport
     * @param end The end location for which to request travel time.
     * @param timeInfo An optional TimeRequestInfo object giving an arrival time to use for the request. If left
     *                 as `None` then the current time will be used.
+    * @param key The Citymapper API key to use for the request.
     * @return Future[TravelTimeResponse]
     */
   def travelTimeRequest(start: Wgs84Coordinate, end: Wgs84Coordinate,
@@ -78,7 +86,13 @@ object CitymapperOnlineServer extends CitymapperServer with FailFastCirceSupport
     Http().singleRequest(HttpRequest(uri = requestUri)).flatMap(Unmarshal(_).to[TravelTimeResponse])
   }
 
-  // to be documented once implemented
+  /**
+    * Makes a coverage request against the online Citymapper API server.
+    *
+    * @param coord  The location for which to request a coverage status.
+    * @param key The Citymapper API key to use for the request.
+    * @return Future[PointCoverage]
+    */
   def coverageRequest(coord: Wgs84Coordinate, key: CmKey)
                      (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[PointCoverage] = {
 
@@ -93,12 +107,13 @@ object CitymapperOnlineServer extends CitymapperServer with FailFastCirceSupport
 object CitymapperTestServer extends CitymapperServer {
 
   /**
-    * Makes a travel time request against the appropriate Citymapper server backend.
+    * Makes a travel time request against the test Citymapper 'server'.
     *
     * @param start The starting location from which to request travel time.
     * @param end The end location for which to request travel time.
     * @param timeInfo An optional TimeRequestInfo object giving an arrival time to use for the request. If left
     *                 as `None` then the current time will be used.
+    * @param key The Citymapper API key to use for the request.
     * @return Future[TravelTimeResponse]
     */
   def travelTimeRequest(start: Wgs84Coordinate, end: Wgs84Coordinate,
@@ -106,7 +121,13 @@ object CitymapperTestServer extends CitymapperServer {
                        (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[TravelTimeResponse] =
     Future.successful(TravelTimeResponse(20))
 
-    // to be documented once implemented
+  /**
+    * Makes a coverage request against the test Citymapper 'server'.
+    *
+    * @param coord  The location for which to request a coverage status.
+    * @param key The Citymapper API key to use for the request.
+    * @return Future[PointCoverage]
+    */
     def coverageRequest(coord: Wgs84Coordinate, key: CmKey)
                        (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[PointCoverage] =
     Future.successful(CoverageResponse(Vector(PointCoverage(true, coord, None))).points.head)

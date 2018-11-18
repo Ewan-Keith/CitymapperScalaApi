@@ -55,7 +55,11 @@ val ttRequest = TravelTimeRequest(startLocation, endLocation, Some(arrivalTime))
 //-----------------------------------------------------------------------
 
 implicit val fullTimeTestKey: CmKey = CmKey(<KEY-STRING>)
-val ttResult = CitymapperRepo().checkCoverage(cRequest1).checkCoverage(cRequest2).checkTravelTime(ttRequest).run()
+val ttResult = CitymapperRepo()
+  .checkCoverage(cRequest1)
+  .checkCoverage(cRequest2)
+  .checkTravelTime(ttRequest)
+  .run()
 
 // set up API key and run the requests using the `CitymapperRepo` object.
 //-----------------------------------------------------------------------
