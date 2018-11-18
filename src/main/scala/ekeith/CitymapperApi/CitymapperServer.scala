@@ -39,7 +39,7 @@ trait CitymapperServer extends UriConstructors {
 
 // to be documented once implemented
   def coverageRequest(coord: Wgs84Coordinate, key: CmKey)
-                     (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[CoverageResponse]
+                     (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[PointCoverage]
 
 
   /** The base URI of the Citymapper API. */
@@ -80,10 +80,10 @@ object CitymapperOnlineServer extends CitymapperServer with FailFastCirceSupport
 
   // to be documented once implemented
   def coverageRequest(coord: Wgs84Coordinate, key: CmKey)
-                     (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[CoverageResponse] = {
+                     (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[PointCoverage] = {
 
     val requestUri = coverageUriGenerator(baseApiUri, coord, key)
-    Http().singleRequest(HttpRequest(uri = requestUri)).flatMap(Unmarshal(_).to[CoverageResponse])
+    Http().singleRequest(HttpRequest(uri = requestUri)).flatMap(Unmarshal(_).to[CoverageResponse]).map(_.points.head)
   }
 }
 
@@ -108,7 +108,7 @@ object CitymapperTestServer extends CitymapperServer {
 
     // to be documented once implemented
     def coverageRequest(coord: Wgs84Coordinate, key: CmKey)
-                       (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[CoverageResponse] =
-    Future.successful(CoverageResponse(Vector(PointCoverage(true, coord, None))))
+                       (implicit ec: ExecutionContext, actorSystem: ActorSystem, materializer: Materializer): Future[PointCoverage] =
+    Future.successful(CoverageResponse(Vector(PointCoverage(true, coord, None))).points.head)
 }
 

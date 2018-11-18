@@ -21,9 +21,9 @@ class CitymapperServerSpec extends AsyncFlatSpec with Matchers {
     )
   }
 
-  "CitymapperTestServer.coverageRequest()" should "eventually return a true coverage response" in {
+  "CitymapperTestServer.coverageRequest()" should "eventually return a true PointCoverage response" in {
     CitymapperTestServer.coverageRequest(testingCoord, testingKey)
-      .map(x => x shouldEqual CoverageResponse(Vector(PointCoverage(true, testingCoord, None))))
+      .map(x => x shouldEqual PointCoverage(true, testingCoord, None))
   }
 
   "CitymapperTestServer.baseApiUri" should "be the correct Citymapper URI base" in {

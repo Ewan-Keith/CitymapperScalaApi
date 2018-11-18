@@ -151,7 +151,7 @@ class CitymapperRepoSpec extends AsyncFlatSpec with Matchers {
   }
 
   it should "eventually return a CoverageResponse if coverage request specified" in {
-    CitymapperRepo(testServer).checkCoverage(covReq).run().head.map(x => x shouldBe a [CoverageResponse])
+    CitymapperRepo(testServer).checkCoverage(covReq).run().head.map(x => x shouldBe a [PointCoverage])
   }
 
   it should "eventually return a TravelTimeResponse if travelTime request specified" in {

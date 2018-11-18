@@ -20,20 +20,15 @@ sealed trait CmResponse
   * @param coord The point's WGS84 coordinate.
   * @param id An optional ID that the user can attach to any requested point.
   */
-final case class PointCoverage(covered: Boolean, coord: Wgs84Coordinate, id: Option[String] = None)
+final case class PointCoverage(covered: Boolean, coord: Wgs84Coordinate, id: Option[String] = None) extends CmResponse
 
 object PointCoverage {
 
-  implicit val decodeFoo: Decoder[PointCoverage] = new Decoder[PointCoverage] {
-    final def apply(c: HCursor): Decoder.Result[PointCoverage] =
-      for {
-        covered <- c.downField("covered").as[Boolean]
-        coord <- c.downField("coord").as[List[Double]]
-      } yield {
-        PointCoverage(covered, Wgs84Coordinate(coord.head, coord.tail.head), None)
-      }
-  }
-
+  implicit val decodeFoo: Decoder[PointCoverage] = (c: HCursor) =>
+    for {
+      covered <- c.downField("covered").as[Boolean]
+      coord <- c.downField("coord").as[List[Double]]
+    } yield PointCoverage(covered, Wgs84Coordinate(coord.head, coord.tail.head), None)
 }
 
 
